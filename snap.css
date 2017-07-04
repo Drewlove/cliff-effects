@@ -1,0 +1,53 @@
+h2{
+    text-align: center; 
+}
+
+.eligibilityHeading{
+    font-size: 20px; 
+    text-align: center; 
+}
+
+.question{
+    font-weight: bold; 
+    margin-top: 2%; 
+}
+
+#resourceEligibilityMessage{
+    display: none; 
+}
+
+#resourceEligibilityMessage_disqualifyingResources{
+    display: none; 
+}
+
+#grossIncomeEligibilityMessage{
+    display: none;
+}
+
+#netIncomeEligibilityMessage{
+    display: none; 
+}
+
+#deductionDependentCareFollowUp{
+    display: none; 
+}
+
+#deductionMedExpenseFollowUp {
+    display: none; 
+}
+
+#deductionChildSupportFollowUp{
+    display: none; 
+}
+
+.shelterInput{
+    display: block; 
+}
+
+#rentFollowUp{
+    display: none; 
+}
+
+#ownFollowUp{
+    display: none
+}
