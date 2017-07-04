@@ -4,158 +4,160 @@
         <title>SNAP</title>
         <link rel="stylesheet" type="text/css" href="snap.css">
     </head>
-    <h2>SNAP Support</h2><hr>
-    <!--Eligibility Criteria: RESOURCES-->
-    <div class="eligibilityHeading">Resources</div>
-    <br>
-    <div id = "resourceEligibilityMessage">
-        You are<span id="resourceEligibilityEval"></span> eligible for SNAP. 
-        <br><br>
-        You<span id="seniorOrDisabledMessage"></span> have a senior or disabled person in your household, which means you can have a maximum of $<span id ="resourceLimitMessage"></span> in savings and qualify for SNAP. 
-    </div>
-    <div id = "resourceEligibilityMessage_disqualifyingResources">
-        You are not eligible for SNAP. You cannot have more than $3,250 in savings and qualify for SNAP.
-    </div>
-    <br><br>
-    <!--Question: Senior in household?-->
-    <div class="question" id="questionSeniorStatus">1. Is anyone in your household 60 years of age or older?<br>
-        <input type="radio" name="senior" id="seniorTrue" value=1>Yes<br>
-        <input type="radio" name="senior" id="seniorFalse" value=0> No
-        <br><br>
-    </div>
-    <!--Question: Disabled person in household?-->
-    <div class="question" id="questionDisabledStatus">2. Is anyone in your household disabled?<br>
-        <input type="radio" name="disabled" id="disabledTrue" value=1>Yes<br>
-        <input type="radio" name="disabled" id="disabledFalse" value=0> No
-        <br><br>
-    </div>
-    <!--Question: Savings amount?-->
-    <div class="question">3. How much do you have in savings?</div><br>
-    <b>Note:</b> Do <em>not</em> include the savings of any people who receive Supplemental Security Income (SSI) or Temporary Assistance for Needy Families (TANF)
-    <br><br>
-    <div id = "questionResourcesAmount">
-        <input type="radio" name="resourcesAmount" value=3251>$3,251 or more<br>
-        <input type="radio" name="resourcesAmount" value=3250>$2,251 to $3,250<br>
-        <input type="radio" name="resourcesAmount" value=2250>$2,250 or less
-    </div>
-    <br><br>
-    <button id="resourcesButton">Resources Check</button>
-    <hr>  
-    <!--Eligibility Criteria: Gross Income-->
-    <div class="eligibilityHeading">Gross Income</div>
-    <br>
-    <div id = "grossIncomeEligibilityMessage">
-        You are <span id="grossIncomeEligibilityEval"></span> eligible for SNAP.
-        <br><br>
-        You have <span id="householdNumberMessage"></span> member(s) in your household, which means your gross income must be $<span id="grossIncomeLimitMessage"></span> per month, or less, in order to qualify for SNAP.
-        <br><br>
-        Your monthly gross income is $<span id="grossIncome"></span>
-    </div>
-    <br><br>
-    <!--Question: How many people in household-->
-    <div class="question">4. How many people are in your household?</div><br> 
-    <select id = "householdSize" name="householdSize">
-        <option value= 1>1</option>
-        <option value= 2>2</option>
-        <option value= 3>3</option>
-        <option value= 4>4</option>
-        <option value= 5>5</option>
-        <option value= 6>6</option>
-        <option value= 7>7</option>
-        <option value= 8>8</option>
-    </select>
-    <br><br>
-    <!--Question: Gross monthly income-->
-    <div class="question">5. What is your household's monthly <em>earned</em> income? </div>
-    The monthly total amount of money your household earns from jobs, wages, and salaries.
-    <br>  
-    <input type="number" class="questionWithIntegerAnswer" id="earnedIncome"><br><br>
-    <div class="question">6. What is your household's monthly <em>benefit</em> income? </div>
-    The monthly total amount of money your household receives from social security and other benefits. 
-    <br>  
-    <input type="number" class="questionWithIntegerAnswer" id="benefitIncome">
-    <br><br>
-    <button id="grossIncomeButton">Gross Income Check</button>
-    <br><br>
-    <em>Your gross income equals your monthly <b>earned</b> income plus your monthly <b>benefit</b> income.</em>
-    <hr>
-    <!--Eligibility Criteria: Net Income-->
-    <div class="eligibilityHeading">Net Income</div>
-    <div id = "netIncomeEligibilityMessage">
-        You are <span id="netIncomeEligibilityEval"></span> eligible for SNAP.
-        <br><br>
-        Since you have <span id="netIncomeHouseholdNumberMessage"></span> member(s) in your household, your monthly net income must be $<span id="netIncomeLimitMessage"></span>, or less, in order to qualify for SNAP. 
-        <br><br>
-        Your monthly net income is $<span id = netIncome></span>.
-    </div>
-    <br><br>
-    <!--Question: Working, job training, or classes?-->
-    <div class = "question" id = "deductionDependentCareQuestion">  
-        7. Are you currently working, receiving job training, or taking classes?
-        <br>
-        <input type="radio" name="workTrainingClasses" value="yes" id="workTrainingClassesYes">Yes<br>
-        <input type="radio" name="workTrainingClasses" value="no" id="workTrainingClassesNo">No
-        <br><br>
-    </div>
-    <!--Follow Up: IF YES, how much spent, if any, on related childcare?-->
-    <div class = "question" id="deductionDependentCareFollowUp">
-        If you use childcare while attending work, training, or classes, how much do you spend on that childcare per month?
-        <br><br>
-        <input class="questionWithIntegerAnswer" id="deductionDependentCareValue" type="number">
-    </div>
-    <br><br>
-    <!--Question: Legally required to pay child support?-->
-    <div class = "question" id="deductionChildSupportQuestion">
-        Are you legally required to pay child support?
-        <br>
-        <input type="radio" name="childSupport" value="yes" id="childSupportYes">Yes<br>
-        <input type="radio" name="childSupport" value="no" id="childSupportNo">No
-    </div>
-    <br><br>
-    <!--Follow Up IF YES, how much spent on legally required child support?-->
-    <div class = "question" id="deductionChildSupportFollowUp">
-        How much do you spend on legally required child support per month?
-        <br><br>
-        <input class="questionWithIntegerAnswer" id="deductionChildSupportValue" type="number">
-        <br><br>
-    </div>
-    <!--Follow Up: IF YES on senior or disabled, how much spent on med expenses?-->
-    <div class = "question" id="deductionMedExpenseFollowUp">This month, how much did you spend on out of pocket medical expenses for any disabled or elderly individuals in your household?
-        <br><br>
-        <input class="questionWithIntegerAnswer" id="deductionMedExpenseValue" type="number">
-        <br><br>
-    </div>
-    <!--Deduction: Shelter Costs-->
-    <div class="eligibilityHeading">Housing</div>
-    <div class="question">Fill out the following <em>monthly</em> expenses to determine if you can get a net income deduction from your housing costs:</div> 
-    <br><br>  
-    Fuel (for heating and cooking)<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterFuelCost">
-    <br>
-    Electricity<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterElectricityCost">
-    <br>
-    Water<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterWaterCost">
-    <br>
-    Basic fee for one telephone<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterPhoneCost">
-    <br><br>
-    <div id="shelterRentOrOwnQuestion">Do you rent or do you own your home?<br>
-        <input type="radio" name="rentOrOwn" id="rentResponse">Rent<br>
-        <input type="radio" name="rentOrOwn" id="ownResponse">Own<br>
-        <input type="radio" name="rentOrOwn" id="neitherResponse">Neither
-        <br><br>
-    </div>
-    <div id ="rentFollowUp">
-        How much do you spend each month on rent?<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterRentCost">
-        <br>
-    </div>
-    <div id="ownFollowUp">
-        How much do you spend each month on your mortgage?<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterMortgageCost">
-        <br>
-        How much do you spend each month on home taxes?<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterHomeTaxesCost">
-        <br>
-    </div>
-    <button id="netIncomeButton">Net Income Check</button>
-    <hr>
     <body>
+        <h2>SNAP Support</h2>
+        This is a test
+        <hr>
+        <!--Eligibility Criteria: RESOURCES-->
+        <div class="eligibilityHeading">Resources</div>
+        <br>
+        <div id = "resourceEligibilityMessage">
+            You are<span id="resourceEligibilityEval"></span> eligible for SNAP. 
+            <br><br>
+            You<span id="seniorOrDisabledMessage"></span> have a senior or disabled person in your household, which means you can have a maximum of $<span id ="resourceLimitMessage"></span> in savings and qualify for SNAP. 
+        </div>
+        <div id = "resourceEligibilityMessage_disqualifyingResources">
+            You are not eligible for SNAP. You cannot have more than $3,250 in savings and qualify for SNAP.
+        </div>
+        <br><br>
+        <!--Question: Senior in household?-->
+        <div class="question" id="questionSeniorStatus">1. Is anyone in your household 60 years of age or older?<br>
+            <input type="radio" name="senior" id="seniorTrue" value=1>Yes<br>
+            <input type="radio" name="senior" id="seniorFalse" value=0> No
+            <br><br>
+        </div>
+        <!--Question: Disabled person in household?-->
+        <div class="question" id="questionDisabledStatus">2. Is anyone in your household disabled?<br>
+            <input type="radio" name="disabled" id="disabledTrue" value=1>Yes<br>
+            <input type="radio" name="disabled" id="disabledFalse" value=0> No
+            <br><br>
+        </div>
+        <!--Question: Savings amount?-->
+        <div class="question">3. How much do you have in savings?</div><br>
+        <b>Note:</b> Do <em>not</em> include the savings of any people who receive Supplemental Security Income (SSI) or Temporary Assistance for Needy Families (TANF)
+        <br><br>
+        <div id = "questionResourcesAmount">
+            <input type="radio" name="resourcesAmount" value=3251>$3,251 or more<br>
+            <input type="radio" name="resourcesAmount" value=3250>$2,251 to $3,250<br>
+            <input type="radio" name="resourcesAmount" value=2250>$2,250 or less
+        </div>
+        <br><br>
+        <button id="resourcesButton">Resources Check</button>
+        <hr>  
+        <!--Eligibility Criteria: Gross Income-->
+        <div class="eligibilityHeading">Gross Income</div>
+        <br>
+        <div id = "grossIncomeEligibilityMessage">
+            You are <span id="grossIncomeEligibilityEval"></span> eligible for SNAP.
+            <br><br>
+            You have <span id="householdNumberMessage"></span> member(s) in your household, which means your gross income must be $<span id="grossIncomeLimitMessage"></span> per month, or less, in order to qualify for SNAP.
+            <br><br>
+            Your monthly gross income is $<span id="grossIncome"></span>
+        </div>
+        <br><br>
+        <!--Question: How many people in household-->
+        <div class="question">4. How many people are in your household?</div><br> 
+        <select id = "householdSize" name="householdSize">
+            <option value= 1>1</option>
+            <option value= 2>2</option>
+            <option value= 3>3</option>
+            <option value= 4>4</option>
+            <option value= 5>5</option>
+            <option value= 6>6</option>
+            <option value= 7>7</option>
+            <option value= 8>8</option>
+        </select>
+        <br><br>
+        <!--Question: Gross monthly income-->
+        <div class="question">5. What is your household's monthly <em>earned</em> income? </div>
+        The monthly total amount of money your household earns from jobs, wages, and salaries.
+        <br>  
+        <input type="number" class="questionWithIntegerAnswer" id="earnedIncome"><br><br>
+        <div class="question">6. What is your household's monthly <em>benefit</em> income? </div>
+        The monthly total amount of money your household receives from social security and other benefits. 
+        <br>  
+        <input type="number" class="questionWithIntegerAnswer" id="benefitIncome">
+        <br><br>
+        <button id="grossIncomeButton">Gross Income Check</button>
+        <br><br>
+        <em>Your gross income equals your monthly <b>earned</b> income plus your monthly <b>benefit</b> income.</em>
+        <hr>
+        <!--Eligibility Criteria: Net Income-->
+        <div class="eligibilityHeading">Net Income</div>
+        <div id = "netIncomeEligibilityMessage">
+            You are <span id="netIncomeEligibilityEval"></span> eligible for SNAP.
+            <br><br>
+            Since you have <span id="netIncomeHouseholdNumberMessage"></span> member(s) in your household, your monthly net income must be $<span id="netIncomeLimitMessage"></span>, or less, in order to qualify for SNAP. 
+            <br><br>
+            Your monthly net income is $<span id = netIncome></span>.
+        </div>
+        <br><br>
+        <!--Question: Working, job training, or classes?-->
+        <div class = "question" id = "deductionDependentCareQuestion">  
+            7. Are you currently working, receiving job training, or taking classes?
+            <br>
+            <input type="radio" name="workTrainingClasses" value="yes" id="workTrainingClassesYes">Yes<br>
+            <input type="radio" name="workTrainingClasses" value="no" id="workTrainingClassesNo">No
+            <br><br>
+        </div>
+        <!--Follow Up: IF YES, how much spent, if any, on related childcare?-->
+        <div class = "question" id="deductionDependentCareFollowUp">
+            If you use childcare while attending work, training, or classes, how much do you spend on that childcare per month?
+            <br><br>
+            <input class="questionWithIntegerAnswer" id="deductionDependentCareValue" type="number">
+        </div>
+        <br><br>
+        <!--Question: Legally required to pay child support?-->
+        <div class = "question" id="deductionChildSupportQuestion">
+            Are you legally required to pay child support?
+            <br>
+            <input type="radio" name="childSupport" value="yes" id="childSupportYes">Yes<br>
+            <input type="radio" name="childSupport" value="no" id="childSupportNo">No
+        </div>
+        <br><br>
+        <!--Follow Up IF YES, how much spent on legally required child support?-->
+        <div class = "question" id="deductionChildSupportFollowUp">
+            How much do you spend on legally required child support per month?
+            <br><br>
+            <input class="questionWithIntegerAnswer" id="deductionChildSupportValue" type="number">
+            <br><br>
+        </div>
+        <!--Follow Up: IF YES on senior or disabled, how much spent on med expenses?-->
+        <div class = "question" id="deductionMedExpenseFollowUp">This month, how much did you spend on out of pocket medical expenses for any disabled or elderly individuals in your household?
+            <br><br>
+            <input class="questionWithIntegerAnswer" id="deductionMedExpenseValue" type="number">
+            <br><br>
+        </div>
+        <!--Deduction: Shelter Costs-->
+        <div class="eligibilityHeading">Housing</div>
+        <div class="question">Fill out the following <em>monthly</em> expenses to determine if you can get a net income deduction from your housing costs:</div> 
+        <br><br>  
+        Fuel (for heating and cooking)<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterFuelCost">
+        <br>
+        Electricity<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterElectricityCost">
+        <br>
+        Water<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterWaterCost">
+        <br>
+        Basic fee for one telephone<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterPhoneCost">
+        <br><br>
+        <div id="shelterRentOrOwnQuestion">Do you rent or do you own your home?<br>
+            <input type="radio" name="rentOrOwn" id="rentResponse">Rent<br>
+            <input type="radio" name="rentOrOwn" id="ownResponse">Own<br>
+            <input type="radio" name="rentOrOwn" id="neitherResponse">Neither
+            <br><br>
+        </div>
+        <div id ="rentFollowUp">
+            How much do you spend each month on rent?<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterRentCost">
+            <br>
+        </div>
+        <div id="ownFollowUp">
+            How much do you spend each month on your mortgage?<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterMortgageCost">
+            <br>
+            How much do you spend each month on home taxes?<input type="number" class="questionWithIntegerAnswer shelterInput" id="shelterHomeTaxesCost">
+            <br>
+        </div>
+        <button id="netIncomeButton">Net Income Check</button>
+        <hr>
         <script src="snap.js"></script>
     </body>
 </html>
