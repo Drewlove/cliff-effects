@@ -1,3 +1,9 @@
+//Lines 226-229, created allotmentValueGenerate function
+//Function should be invoked when user clicks on Net Income Check button
+//Allotment amount displays as part of message to user. 
+//Check to see if this works. 
+
+
 //client (ie user) Object
 var client = {
     senior: 0,
@@ -55,6 +61,7 @@ function resourceEligibilityDisplayMessage(){
         seniorOrDisabledMessage.innerHTML = (client.senior==1 || client.disabled==1) ? "":" do not";
         resourceLimitMessage.innerHTML =  (client.senior || client.disabled) ? "3,250":"2,250";
     }
+    console.log("test")
 }
 
                                 /*GROSS INCOME ELIGIBILITY*/
@@ -80,6 +87,28 @@ var povertyLevelArray = [0,
                          householdPovertyLevel.Six, 
                          householdPovertyLevel.Seven, 
                          householdPovertyLevel.Eight,
+                        ];
+
+var maximumMonthlyAllotment = {
+    One: 194, 
+    Two: 357, 
+    Three: 511, 
+    Four: 649, 
+    Five: 771, 
+    Six: 925,
+    Seven: 1022, 
+    Eight: 1169,  
+}
+
+var maximumMonthlyAllotmentArray = [0, 
+                         maximumMonthlyAllotment.One, 
+                         maximumMonthlyAllotment.Two, 
+                         maximumMonthlyAllotment.Three, 
+                         maximumMonthlyAllotment.Four, 
+                         maximumMonthlyAllotment.Five, 
+                         maximumMonthlyAllotment.Six, 
+                         maximumMonthlyAllotment.Seven, 
+                         maximumMonthlyAllotment.Eight,
                         ];
 
 //For all questions that ask for a dollar amount, set default value to $0
@@ -145,6 +174,7 @@ document.getElementById("netIncomeButton").addEventListener("click",function() {
     shelterDeductionLimitGenerate(); 
     netIncomeValueGenerate(); //Calculate the sum of deductions that can be applied to net income
     netIncomeEligibilityCheck();//Determine if client is eligible based on net income  
+    allotmentValueGenerate(); //Calculates monthly allotment for user
     netIncomeEligibilityDisplayMessage();//Display message to client regarding eligibility status and explanation of status
 });
 function netIncomeDeductionSumGenerate(){
@@ -198,6 +228,12 @@ function netIncomeEligibilityCheck(){
         netIncomeEligible = false;
     }
 }
+
+function allotmentValueGenerate(){
+    var allotmentValue = (client.netIncome * 0.3) - maximumMonthlyAllotmentArray[client.householdSize];
+    document.getElementById("allotmentValueMessage").innerHTML = allotmentValue;
+}
+
 function netIncomeEligibilityDisplayMessage(){
     netIncomeEligibilityMessage.style.display = "initial"; 
     netIncomeEligibilityEval.innerHTML = (netIncomeEligible == true) ? "":" not";
