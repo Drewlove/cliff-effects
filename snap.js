@@ -1,9 +1,3 @@
-//Lines 226-229, created allotmentValueGenerate function
-//Function should be invoked when user clicks on Net Income Check button
-//Allotment amount displays as part of message to user. 
-//Check to see if this works. 
-
-
 //client (ie user) Object
 var client = {
     senior: 0,
@@ -17,17 +11,12 @@ var client = {
 }; 
 
                                 /*RESOURCE ELIGIBILITY*/
-//I. VARs and HTML IDs 
 var resourceEligibilityMessage = document.getElementById("resourceEligibilityMessage");
 var resourceEligibilityEval = document.getElementById("resourceEligibilityEval");
 var seniorOrDisabledMessage = document.getElementById("seniorOrDisabledMessage"); 
 var resourceLimitMessage = document.getElementById("resourceLimitMessage"); 
 var resourceEligibilityMessage_disqualifyingResources = document.getElementById("resourceEligibilityMessage_disqualifyingResources"); 
 
-//Add event listener to Resources Button. On click, run three functions:
-// 1, generate client Object values relevant for resources eligibility check
-// 2, determine if client is eligible based on resource information 
-// 3, display message to client regarding eligibility status and explanation of status 
 document.getElementById("resourcesButton").addEventListener("click", function() { 
     resourceValueGenerate(); 
     resourceEligibilityCheck();
@@ -61,7 +50,6 @@ function resourceEligibilityDisplayMessage(){
         seniorOrDisabledMessage.innerHTML = (client.senior==1 || client.disabled==1) ? "":" do not";
         resourceLimitMessage.innerHTML =  (client.senior || client.disabled) ? "3,250":"2,250";
     }
-    console.log("test")
 }
 
                                 /*GROSS INCOME ELIGIBILITY*/
@@ -117,22 +105,19 @@ for(i=0; i<questionWithIntegerAnswer.length; i++){
     questionWithIntegerAnswer[i].defaultValue= 0; 
 }
 
-//I. VARs and HTML IDs
+
 var grossIncomeEligibilityMessage = document.getElementById("grossIncomeEligibilityMessage");
 var grossIncomeEligibilityEval = document.getElementById("grossIncomeEligibilityEval");
 var householdNumberMessage = document.getElementById("householdNumberMessage"); 
 var grossIncomeLimitMessage = document.getElementById("grossIncomeLimitMessage");  
 var grossIncome = document.getElementById("grossIncome"); 
-//Add event listener to Gross Income Button. On click, run the following functions:
-// Generate client Object values relevant for gross income eligibility check
-// Determine if client is eligible based on gross income information 
-// Display message to client regarding eligibility status and explanation of status 
+
 document.getElementById("grossIncomeButton").addEventListener("click", function() { 
     grossIncomeValueGenerate(); 
     grossIncomeEligibilityCheck();
     grossIncomeEligibilityDisplayMessage();
 });
-//REFACTOR: give all elements the same class, and use a for loop in the function to sum them. example: "grossIncomeInteger"
+
 function grossIncomeValueGenerate(){
     client.householdSize = parseInt(document.getElementById("householdSize").value);
     client.earnedIncome = parseInt(document.getElementById("earnedIncome").value);
@@ -157,25 +142,22 @@ function grossIncomeEligibilityDisplayMessage(){
 }
 
                                 /*NET INCOME ELIGIBILITY*/ 
-//I. VARs and HTML IDs
 var netIncomeEligibilityMessage = document.getElementById("netIncomeEligibilityMessage");
 var netIncomeEligibilityEval = document.getElementById("netIncomeEligibilityEval");
 var netIncomeHouseholdNumberMessage = document.getElementById("netIncomeHouseholdNumberMessage");
 var netIncomeLimitMessage = document.getElementById("netIncomeLimitMessage");
 var netIncome = document.getElementById("netIncome");
-//Net Income deduction based on family size. Referenced in netIncomeDeductionSumGenerate(); 
 var deductionFamilySizeArray = [0, 157, 157, 157, 168, 197, 226];
 
-//Add "click" event listener to Net Income Button. 
 document.getElementById("netIncomeButton").addEventListener("click",function() { 
     grossIncomeValueGenerate(); //Generate client Object values for gross income since net income references those values 
     netIncomeDeductionSumGenerate();
     shelterDeductionSumGenerate(); 
     shelterDeductionLimitGenerate(); 
     netIncomeValueGenerate(); //Calculate the sum of deductions that can be applied to net income
-    netIncomeEligibilityCheck();//Determine if client is eligible based on net income  
-    allotmentValueGenerate(); //Calculates monthly allotment for user
-    netIncomeEligibilityDisplayMessage();//Display message to client regarding eligibility status and explanation of status
+    netIncomeEligibilityCheck();
+    allotmentValueGenerate(); 
+    netIncomeEligibilityDisplayMessage();
 });
 function netIncomeDeductionSumGenerate(){
     var deductionTwentyPercent = parseInt(document.getElementById("earnedIncome").value*0.2); 
@@ -190,8 +172,7 @@ function netIncomeDeductionSumGenerate(){
     }
     netIncomeDeductionSum = deductionTwentyPercent + deductionFamilySize + deductionDependentCare + deductionMedExpense + deductionChildSupport; 
 }
-/*Shelter Deduction*/
-//Generate shelter deduction 
+                    /*Shelter Deduction*/
 function shelterDeductionSumGenerate(){
     client.netIncome = client.grossIncome - netIncomeDeductionSum;
     shelterCostDeductionSum = 0; //global variable used in netIncomeValueGenerate() function 
@@ -201,12 +182,11 @@ function shelterDeductionSumGenerate(){
         shelterCostSum += parseInt(shelterInput[i].value);
     }
     if(shelterCostSum < client.netIncome * 0.5){
-        shelterCostDeductionSum = 0; //ie, do not include a shelter deduction 
+        shelterCostDeductionSum = 0; 
     } else {
         shelterCostDeductionSum += shelterCostSum - (client.netIncome * 0.5)  
     } 
 }
-//Determine limit of shelter deduction
 function shelterDeductionLimitGenerate(){
     if(document.getElementById("seniorTrue").checked === true || document.getElementById("disabledTrue").checked === true ){
         return shelterCostDeductionSum; 
@@ -216,7 +196,6 @@ function shelterDeductionLimitGenerate(){
         return shelterCostDeductionSum
     }
 }
-
 function netIncomeValueGenerate(){ 
     client.netIncome = client.grossIncome - netIncomeDeductionSum - shelterCostDeductionSum;
 }
@@ -228,9 +207,8 @@ function netIncomeEligibilityCheck(){
         netIncomeEligible = false;
     }
 }
-
 function allotmentValueGenerate(){
-    var allotmentValue = (client.netIncome * 0.3) - maximumMonthlyAllotmentArray[client.householdSize];
+    var allotmentValue = maximumMonthlyAllotmentArray[client.householdSize] - Math.ceil((client.netIncome * 0.3));
     document.getElementById("allotmentValueMessage").innerHTML = allotmentValue;
 }
 
@@ -244,9 +222,7 @@ function netIncomeEligibilityDisplayMessage(){
 
                                 /*Display Functions for Net Income Deduction Questions*/
 //Dependent Care Deduction Display
-//Add event listener to question Display  
 document.getElementById("deductionDependentCareQuestion").addEventListener("click", displayDependentCareFollowUp);
-//Display question if user paid for childcare so they could attend work, work related training, and\or classes 
 function displayDependentCareFollowUp(){
     var deductionDependentCareFollowUp = document.getElementById("deductionDependentCareFollowUp");
     if(document.getElementById("workTrainingClassesYes").checked){
@@ -256,9 +232,7 @@ function displayDependentCareFollowUp(){
     }
 }
 //Child Support Deduction Display  
-//Add event listener to question Display 
 document.getElementById("deductionChildSupportQuestion").addEventListener("click", displayChildSupportFollowUp);
-//Display question if user paid for childcare so they could attend work, work related training, and\or classes 
 function displayChildSupportFollowUp(){
     var deductionChildSupportFollowUp = document.getElementById("deductionChildSupportFollowUp");
     if(document.getElementById("childSupportYes").checked){
@@ -268,10 +242,8 @@ function displayChildSupportFollowUp(){
     }
 }
 //Medical Expense Deduction Display   
-//Add event listener to senior question and disabled question 
 document.getElementById("questionDisabledStatus").addEventListener("click", displayMedExpenseFollowUp);
 document.getElementById("questionSeniorStatus").addEventListener("click", displayMedExpenseFollowUp);
-//Display question if user has senior or disabled individual in their household
 function displayMedExpenseFollowUp(){
     var deductionMedExpenseFollowUp = document.getElementById("deductionMedExpenseFollowUp");
     if (document.getElementById("seniorTrue").checked == true || document.getElementById("disabledTrue").checked == true){   
@@ -281,18 +253,23 @@ function displayMedExpenseFollowUp(){
     }
 };
 //Shelter Cost Deduction Display   
-//Add event listener to "rent or own" question 
 document.getElementById("shelterRentOrOwnQuestion").addEventListener("click", rentOrOwnDisplayFollowUp )
 function rentOrOwnDisplayFollowUp(){
     if(document.getElementById("rentResponse").checked){
         document.getElementById("rentFollowUp").style.display = "initial";
         document.getElementById("ownFollowUp").style.display = "none";
+        document.getElementById("shelterMortgageCost").value = 0; 
+        document.getElementById("shelterHomeTaxesCost").value = 0; 
     } else if (document.getElementById("ownResponse").checked){
-        document.getElementById("rentFollowUp").style.display = "none";
         document.getElementById("ownFollowUp").style.display = "initial";
+        document.getElementById("rentFollowUp").style.display = "none";
+        document.getElementById("shelterRentCost").value = 0;       
     } else {
         document.getElementById("rentFollowUp").style.display = "none";
         document.getElementById("ownFollowUp").style.display = "none";
+        document.getElementById("shelterRentCost").value = 0;
+        document.getElementById("shelterMortgageCost").value = 0; 
+        document.getElementById("shelterHomeTaxesCost").value = 0;
     }
 }
 
